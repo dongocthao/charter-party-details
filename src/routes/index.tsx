@@ -1,29 +1,19 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
-    ],
-  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen flex items-center justify-center bg-background">
+      <div className="space-y-4 text-center">
+        <h1 className="text-2xl font-bold">Charter Forms</h1>
+        <div className="flex gap-3 justify-center">
+          <Link to="/time-charter" className="px-4 py-2 rounded bg-primary text-primary-foreground">Time Charter</Link>
+          <Link to="/voyage-charter" className="px-4 py-2 rounded border">Voyage Charter</Link>
+        </div>
+      </div>
     </div>
   );
 }
