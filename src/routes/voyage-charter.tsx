@@ -1,6 +1,6 @@
 import * as React from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Calendar as CalendarIcon, Info, Plus, Minus, Search, Pencil } from "lucide-react";
+import { Calendar as CalendarIcon, Info, Plus, Minus, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
