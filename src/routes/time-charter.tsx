@@ -6,11 +6,58 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Button } from "@/components/ui/button";
 import { CharterPartyPanel } from "@/components/charter/CharterPartyPanel";
 
+// ============== Nhãn giao diện - Tab Thuê tàu định hạn (chỉnh sửa tại đây) ==============
+export const TC_LABELS = {
+  tabVoyage: "Thuê chuyến",
+  tabTime: "Thuê định hạn",
+  mainTerms: "Điều khoản chính",
+  recap: "Tóm tắt",
+  attachment: "Đính kèm",
+  title: "Chi tiết Thuê tàu định hạn",
+  single: "Đơn",
+  multi: "Nhiều",
+  duration: "Thời hạn",
+  minimum: "Tối thiểu",
+  maximum: "Tối đa",
+  day: "Ngày",
+  month: "Tháng",
+  aboutMeans: "'About' nghĩa là",
+  layCan: "Lay / Can",
+  delArea: "Cảng/Khu vực giao tàu",
+  redelArea: "Cảng/Khu vực trả tàu",
+  area: "Khu vực",
+  port: "Cảng",
+  estSchedule: "Lịch dự kiến",
+  actSchedule: "Lịch thực tế",
+  hire: "Giá thuê",
+  customHire: "Tuỳ chọn giá thuê",
+  addComm: "Hoa hồng thêm",
+  ballastBonus: "Phụ phí ballast",
+  cev: "C. E. V.",
+  inLumpsum: "Trọn gói",
+  ilohc: "ILOHC",
+  bunker: "Nhiên liệu",
+  borToBe: "BOR sẽ là",
+  aboutSameBod: "Tương đương BOD",
+  type: "Loại",
+  quantity: "Số lượng",
+  bod: "BOD",
+  bor: "BOR",
+  unit: "Đơn vị",
+  priceBothEnds: "Giá tại 2 đầu",
+  unitPrice: "Đơn giá",
+  perMt: "trên MT",
+  cancel: "Huỷ",
+  save: "Lưu",
+  pickDate: "Chọn ngày",
+  search: "Tìm kiếm",
+};
+
 export const Route = createFileRoute("/time-charter")({
   head: () => ({
     meta: [
-      { title: "Time Charter Details" },
-      { name: "description", content: "Input the main terms of Time Charter." },
+      { title: "Thuê tàu định hạn" },
+      { name: "description", content: "Nhập các điều khoản chính của hợp đồng thuê tàu định hạn." },
     ],
   }),
   component: TimeCharterPage,
@@ -25,11 +72,24 @@ function FieldRow({ label, children }: { label: React.ReactNode; children: React
   );
 }
 
+function IconBtn({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <button
+      type="button"
+      title={title}
+      aria-label={title}
+      className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+    >
+      {children}
+    </button>
+  );
+}
+
 function DateInput({ value, placeholder, w = "w-44" }: { value?: string; placeholder?: string; w?: string }) {
   return (
     <div className="relative">
       <Input defaultValue={value} placeholder={placeholder} className={`${w} pr-9 h-9`} />
-      <CalendarIcon className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+      <IconBtn title={TC_LABELS.pickDate}><CalendarIcon className="h-4 w-4" /></IconBtn>
     </div>
   );
 }
@@ -37,6 +97,7 @@ function DateInput({ value, placeholder, w = "w-44" }: { value?: string; placeho
 type BunkerRow = { type: string; bod: string; bor: string; price: string };
 
 function TimeCharterPage() {
+  const L = TC_LABELS;
   const [bunkerRows, setBunkerRows] = React.useState<BunkerRow[]>([
     { type: "", bod: "", bor: "", price: "" },
   ]);
@@ -58,14 +119,14 @@ function TimeCharterPage() {
     <div className="min-h-screen bg-background p-6">
       <div className="mx-auto max-w-[1400px]">
         <div className="mb-4 flex gap-2">
-          <Link to="/time-charter" className="text-sm font-semibold border-b-2 border-primary px-3 py-1.5">Time Charter</Link>
-          <Link to="/voyage-charter" className="text-sm text-muted-foreground px-3 py-1.5 hover:text-foreground">Voyage Charter</Link>
+          <Link to="/voyage-charter" className="text-sm text-muted-foreground px-3 py-1.5 hover:text-foreground">{L.tabVoyage}</Link>
+          <Link to="/time-charter" className="text-sm font-semibold border-b-2 border-primary px-3 py-1.5">{L.tabTime}</Link>
         </div>
 
         <div className="mb-2 flex gap-4 border-b text-sm">
-          <span className="border-b-2 border-primary px-3 py-2 font-semibold text-primary">Main Terms</span>
-          <span className="px-3 py-2 text-muted-foreground">Recap</span>
-          <span className="px-3 py-2 text-muted-foreground">Attachment</span>
+          <span className="border-b-2 border-primary px-3 py-2 font-semibold text-primary">{L.mainTerms}</span>
+          <span className="px-3 py-2 text-muted-foreground">{L.recap}</span>
+          <span className="px-3 py-2 text-muted-foreground">{L.attachment}</span>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-6 mt-4">
@@ -80,44 +141,44 @@ function TimeCharterPage() {
 
           <div className="rounded-md border bg-card p-6 shadow-sm">
             <div className="flex items-center gap-3 border-b pb-3 mb-4">
-              <h2 className="text-base font-bold">Time Charter Details</h2>
+              <h2 className="text-base font-bold">{L.title}</h2>
               <Select defaultValue="single">
                 <SelectTrigger className="w-32 h-8"><SelectValue /></SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="single">Single</SelectItem>
-                  <SelectItem value="multi">Multi</SelectItem>
+                  <SelectItem value="single">{L.single}</SelectItem>
+                  <SelectItem value="multi">{L.multi}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
-            <FieldRow label="Duration">
+            <FieldRow label={L.duration}>
               <Select defaultValue="min"><SelectTrigger className="w-28 h-9"><SelectValue /></SelectTrigger>
-                <SelectContent><SelectItem value="min">Minimum</SelectItem></SelectContent>
+                <SelectContent><SelectItem value="min">{L.minimum}</SelectItem></SelectContent>
               </Select>
               <Input className="w-28 h-9" />
               <Select defaultValue="day"><SelectTrigger className="w-24 h-9"><SelectValue /></SelectTrigger>
-                <SelectContent><SelectItem value="day">Day</SelectItem><SelectItem value="month">Month</SelectItem></SelectContent>
+                <SelectContent><SelectItem value="day">{L.day}</SelectItem><SelectItem value="month">{L.month}</SelectItem></SelectContent>
               </Select>
               <span className="text-muted-foreground">-</span>
               <Select defaultValue="max"><SelectTrigger className="w-28 h-9"><SelectValue /></SelectTrigger>
-                <SelectContent><SelectItem value="max">Maximum</SelectItem></SelectContent>
+                <SelectContent><SelectItem value="max">{L.maximum}</SelectItem></SelectContent>
               </Select>
               <Input className="w-28 h-9" />
               <Select defaultValue="day"><SelectTrigger className="w-24 h-9"><SelectValue /></SelectTrigger>
-                <SelectContent><SelectItem value="day">Day</SelectItem></SelectContent>
+                <SelectContent><SelectItem value="day">{L.day}</SelectItem></SelectContent>
               </Select>
             </FieldRow>
 
             <div className="grid grid-cols-[140px_1fr] gap-3 items-center py-1.5">
               <div />
               <div className="flex items-center gap-2">
-                <Input placeholder="'About' Means" className="w-28 h-9" disabled />
+                <Input placeholder={L.aboutMeans} className="w-28 h-9" disabled />
                 <Input className="w-28 h-9" disabled />
-                <Select disabled><SelectTrigger className="w-24 h-9"><SelectValue placeholder="Day" /></SelectTrigger><SelectContent /></Select>
+                <Select disabled><SelectTrigger className="w-24 h-9"><SelectValue placeholder={L.day} /></SelectTrigger><SelectContent /></Select>
               </div>
             </div>
 
-            <FieldRow label="Lay / Can">
+            <FieldRow label={L.layCan}>
               <DateInput value="2022-10-13 00:01" />
               <span className="text-muted-foreground">-</span>
               <DateInput value="2022-10-14 23:59" />
@@ -126,64 +187,66 @@ function TimeCharterPage() {
               </Select>
             </FieldRow>
 
-            <FieldRow label="Del Area or Port">
-              <Select><SelectTrigger className="w-28 h-9"><SelectValue placeholder="" /></SelectTrigger><SelectContent><SelectItem value="a">Area</SelectItem></SelectContent></Select>
+            <FieldRow label={L.delArea}>
+              <Select><SelectTrigger className="w-28 h-9"><SelectValue placeholder="" /></SelectTrigger><SelectContent><SelectItem value="a">{L.area}</SelectItem></SelectContent></Select>
               <Input defaultValue="Incheon (KR) [+09:00]" className="w-56 h-9" />
               <Info className="h-4 w-4 text-primary" />
             </FieldRow>
 
-            <FieldRow label="Redel Area or Port">
-              <Select><SelectTrigger className="w-28 h-9"><SelectValue placeholder="" /></SelectTrigger><SelectContent><SelectItem value="a">Area</SelectItem></SelectContent></Select>
+            <FieldRow label={L.redelArea}>
+              <Select><SelectTrigger className="w-28 h-9"><SelectValue placeholder="" /></SelectTrigger><SelectContent><SelectItem value="a">{L.area}</SelectItem></SelectContent></Select>
               <Input defaultValue="London (GB) [+00:00]" className="w-56 h-9" />
               <Info className="h-4 w-4 text-primary" />
             </FieldRow>
 
-            <FieldRow label="Estimated Schedule">
+            <FieldRow label={L.estSchedule}>
               <DateInput value="2022-10-27 01:37" />
               <span className="text-muted-foreground">-</span>
               <DateInput />
             </FieldRow>
 
-            <FieldRow label="Actual Schedule">
+            <FieldRow label={L.actSchedule}>
               <DateInput />
               <span className="text-muted-foreground">-</span>
               <DateInput />
             </FieldRow>
 
-            <FieldRow label="Hire">
+            <FieldRow label={L.hire}>
               <Input className="w-64 h-9" />
             </FieldRow>
             <div className="grid grid-cols-[140px_1fr] gap-3 items-center py-1.5">
               <div />
-              <Input placeholder="Input custom hire option." className="w-64 h-9" />
+              <Input placeholder={L.customHire} className="w-64 h-9" />
             </div>
 
-            <FieldRow label="Add. Comm.">
+            <FieldRow label={L.addComm}>
               <Input className="w-40 h-9" />
             </FieldRow>
 
-            <FieldRow label="Ballast Bonus">
+            <FieldRow label={L.ballastBonus}>
               <div className="relative">
                 <Input className="w-40 h-9 pl-8" />
-                <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <button type="button" title={L.search} aria-label={L.search} className="absolute left-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
+                  <Search className="h-4 w-4" />
+                </button>
               </div>
             </FieldRow>
 
-            <FieldRow label="C. E. V.">
+            <FieldRow label={L.cev}>
               <Input defaultValue="1,300.00" className="w-40 h-9 text-right" />
               <Select defaultValue="lump"><SelectTrigger className="w-40 h-9"><SelectValue /></SelectTrigger>
-                <SelectContent><SelectItem value="lump">in Lumpsum</SelectItem></SelectContent>
+                <SelectContent><SelectItem value="lump">{L.inLumpsum}</SelectItem></SelectContent>
               </Select>
             </FieldRow>
 
-            <FieldRow label="ILOHC">
+            <FieldRow label={L.ilohc}>
               <Input defaultValue="4,500.00" className="w-40 h-9 text-right" />
             </FieldRow>
 
-            <FieldRow label="Bunker">
-              <span className="text-sm">BOR to be</span>
+            <FieldRow label={L.bunker}>
+              <span className="text-sm">{L.borToBe}</span>
               <Select defaultValue="same"><SelectTrigger className="w-56 h-9"><SelectValue /></SelectTrigger>
-                <SelectContent><SelectItem value="same">About Same As On BOD</SelectItem></SelectContent>
+                <SelectContent><SelectItem value="same">{L.aboutSameBod}</SelectItem></SelectContent>
               </Select>
             </FieldRow>
 
@@ -193,17 +256,17 @@ function TimeCharterPage() {
                 <table className="w-full text-sm">
                   <thead className="bg-muted">
                     <tr>
-                      <th rowSpan={2} className="border px-2 py-1 font-medium">Type</th>
-                      <th colSpan={3} className="border px-2 py-1 font-medium">Quantity</th>
-                      <th colSpan={2} className="border px-2 py-1 font-medium">Price at both ends</th>
+                      <th rowSpan={2} className="border px-2 py-1 font-medium">{L.type}</th>
+                      <th colSpan={3} className="border px-2 py-1 font-medium">{L.quantity}</th>
+                      <th colSpan={2} className="border px-2 py-1 font-medium">{L.priceBothEnds}</th>
                       <th className="border px-2 py-1 w-16"></th>
                     </tr>
                     <tr>
-                      <th className="border px-2 py-1 font-normal">BOD</th>
-                      <th className="border px-2 py-1 font-normal">BOR</th>
-                      <th className="border px-2 py-1 font-normal">Unit</th>
-                      <th className="border px-2 py-1 font-normal">Unit Price</th>
-                      <th className="border px-2 py-1 font-normal">Unit</th>
+                      <th className="border px-2 py-1 font-normal">{L.bod}</th>
+                      <th className="border px-2 py-1 font-normal">{L.bor}</th>
+                      <th className="border px-2 py-1 font-normal">{L.unit}</th>
+                      <th className="border px-2 py-1 font-normal">{L.unitPrice}</th>
+                      <th className="border px-2 py-1 font-normal">{L.unit}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -214,7 +277,7 @@ function TimeCharterPage() {
                         <td className="border px-2 py-1"><Input value={row.bor} onChange={(e) => { const n = [...bunkerRows]; n[i].bor = e.target.value; setBunkerRows(n); }} className="h-7 border-0 text-right shadow-none focus-visible:ring-0" /></td>
                         <td className="border px-2 py-1 text-center">MT</td>
                         <td className="border px-2 py-1"><Input value={row.price} onChange={(e) => { const n = [...bunkerRows]; n[i].price = e.target.value; setBunkerRows(n); }} className="h-7 border-0 text-right shadow-none focus-visible:ring-0" /></td>
-                        <td className="border px-2 py-1 bg-yellow-50 text-center">per MT</td>
+                        <td className="border px-2 py-1 bg-yellow-50 text-center">{L.perMt}</td>
                         <td className="border px-2 py-1">
                           <div className="flex gap-1 justify-center">
                             <button type="button" onClick={() => addRow(i)} className="text-emerald-600 hover:text-emerald-700"><Plus className="h-4 w-4" /></button>
@@ -229,8 +292,8 @@ function TimeCharterPage() {
             </div>
 
             <div className="flex justify-end gap-2 pt-6 border-t mt-6">
-              <Button variant="outline">Cancel</Button>
-              <Button>Save</Button>
+              <Button>{L.save}</Button>
+              <Button variant="outline">{L.cancel}</Button>
             </div>
           </div>
         </div>
