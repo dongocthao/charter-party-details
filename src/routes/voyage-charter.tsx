@@ -370,7 +370,3 @@ function VoyageCharterPage() {
     </div>
   );
 }
-      </div>
-    </div>
-  );
-}
