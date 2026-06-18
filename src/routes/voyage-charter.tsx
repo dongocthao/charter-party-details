@@ -365,6 +365,11 @@ function VoyageCharterPage() {
             </div>
           </div>
         </div>
+        )}
+      </div>
+    </div>
+  );
+}
       </div>
     </div>
   );
