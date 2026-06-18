@@ -303,40 +303,40 @@ function TimeCharterPage() {
               <Input placeholder={L.customHire} className="w-56 h-9" />
             </FieldRow>
 
-            {/* Phí hoa hồng | Phụ phí ballast */}
+            {/* Phí hoa hồng */}
             <FieldRow label={L.addComm}>
-              <Input className="w-40 h-9 text-right" />
-              <CurrencySelect />
-              <span className="ml-6 text-sm w-32">{L.ballastBonus}</span>
+              <Input className="w-20 h-9 text-right" />
+              <span className="ml-4 text-sm">{L.ballastBonus}</span>
               <div className="relative">
-                <Input className="w-40 h-9 pl-8 text-right" />
+                <Input className="w-32 h-9 pl-8 text-right" />
                 <button type="button" title={L.search} aria-label={L.search} className="absolute left-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
                   <Search className="h-4 w-4" />
                 </button>
               </div>
               <CurrencySelect />
               <Select defaultValue="lump">
-                <SelectTrigger className="w-32 h-9"><SelectValue /></SelectTrigger>
+                <SelectTrigger className="w-28 h-9"><SelectValue /></SelectTrigger>
                 <SelectContent><SelectItem value="lump">{L.inLumpsum}</SelectItem></SelectContent>
               </Select>
             </FieldRow>
 
             {/* C.E.V | ILOHC */}
             <FieldRow label={L.cev}>
-              <Input defaultValue="1,300.00" className="w-40 h-9 text-right" />
+              <Input defaultValue="1,300.00" className="w-30 h-9 text-right" />
               <CurrencySelect />
               <Select defaultValue="lump">
-                <SelectTrigger className="w-32 h-9"><SelectValue /></SelectTrigger>
+                <SelectTrigger className="w-28 h-9"><SelectValue /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="lump">{L.inLumpsum}</SelectItem>
                   <SelectItem value="day">{L.perDay}</SelectItem>
                   <SelectItem value="30d">{L.per30Days}</SelectItem>
                 </SelectContent>
               </Select>
-              <span className="ml-6 text-sm w-32">{L.ilohc}</span>
-              <Input defaultValue="4,500.00" className="w-40 h-9 text-right" />
+              <span className="ml-4 text-sm">{L.ilohc}</span>
+              <Input defaultValue="4,500.00" className="w-30 h-9 text-right" />
               <CurrencySelect />
             </FieldRow>
+
 
             {/* Phí môi giới */}
             <FieldRow label={L.brokerage}>
