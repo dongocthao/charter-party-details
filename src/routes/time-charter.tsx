@@ -24,8 +24,8 @@ export const TC_LABELS = {
   year: "Năm",
   aboutMeans: "'About' nghĩa là",
   layCan: "Lay / Can",
-  delArea: "Cảng/Khu vực giao tàu",
-  redelArea: "Cảng/Khu vực trả tàu",
+  delArea: "Nơi giao tàu",
+  redelArea: "Nơi trả tàu",
   area: "Khu vực",
   port: "Cảng",
   estSchedule: "Lịch dự kiến",
@@ -79,12 +79,13 @@ export const Route = createFileRoute("/time-charter")({
 
 function FieldRow({ label, children }: { label: React.ReactNode; children: React.ReactNode }) {
   return (
-    <div className="grid grid-cols-[140px_1fr] gap-3 items-start py-1.5">
+    <div className="grid grid-cols-[120px_1fr] gap-2 items-start py-1.5">
       <div className="text-sm pt-2">{label}</div>
       <div className="flex flex-wrap items-center gap-2">{children}</div>
     </div>
   );
 }
+
 
 function IconBtn({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -223,11 +224,11 @@ function TimeCharterPage() {
             </div>
 
             <FieldRow label={L.duration}>
-              <Select defaultValue="min"><SelectTrigger className="w-28 h-9"><SelectValue /></SelectTrigger>
+              <Select defaultValue="min"><SelectTrigger className="w-24 h-9"><SelectValue /></SelectTrigger>
                 <SelectContent><SelectItem value="min">{L.minimum}</SelectItem></SelectContent>
               </Select>
-              <Input className="w-28 h-9" />
-              <Select defaultValue="day"><SelectTrigger className="w-24 h-9"><SelectValue /></SelectTrigger>
+              <Input className="w-20 h-9" />
+              <Select defaultValue="day"><SelectTrigger className="w-20 h-9"><SelectValue /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="day">{L.day}</SelectItem>
                   <SelectItem value="month">{L.month}</SelectItem>
@@ -235,11 +236,11 @@ function TimeCharterPage() {
                 </SelectContent>
               </Select>
               <span className="text-muted-foreground">-</span>
-              <Select defaultValue="max"><SelectTrigger className="w-28 h-9"><SelectValue /></SelectTrigger>
+              <Select defaultValue="max"><SelectTrigger className="w-24 h-9"><SelectValue /></SelectTrigger>
                 <SelectContent><SelectItem value="max">{L.maximum}</SelectItem></SelectContent>
               </Select>
-              <Input className="w-28 h-9" />
-              <Select defaultValue="day"><SelectTrigger className="w-24 h-9"><SelectValue /></SelectTrigger>
+              <Input className="w-20 h-9" />
+              <Select defaultValue="day"><SelectTrigger className="w-20 h-9"><SelectValue /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="day">{L.day}</SelectItem>
                   <SelectItem value="month">{L.month}</SelectItem>
@@ -248,14 +249,15 @@ function TimeCharterPage() {
               </Select>
             </FieldRow>
 
-            <div className="grid grid-cols-[140px_1fr] gap-3 items-center py-1.5">
+            <div className="grid grid-cols-[120px_1fr] gap-2 items-center py-1.5">
               <div />
               <div className="flex items-center gap-2">
-                <Input placeholder={L.aboutMeans} className="w-28 h-9" disabled />
-                <Input className="w-28 h-9" disabled />
-                <Select disabled><SelectTrigger className="w-24 h-9"><SelectValue placeholder={L.day} /></SelectTrigger><SelectContent /></Select>
+                <Input placeholder={L.aboutMeans} className="w-24 h-9" disabled />
+                <Input className="w-20 h-9" disabled />
+                <Select disabled><SelectTrigger className="w-20 h-9"><SelectValue placeholder={L.day} /></SelectTrigger><SelectContent /></Select>
               </div>
             </div>
+
 
             <FieldRow label={L.layCan}>
               <DateInput value="2022-10-13 00:01" />
@@ -301,40 +303,40 @@ function TimeCharterPage() {
               <Input placeholder={L.customHire} className="w-56 h-9" />
             </FieldRow>
 
-            {/* Phí hoa hồng | Phụ phí ballast */}
+            {/* Phí hoa hồng */}
             <FieldRow label={L.addComm}>
-              <Input className="w-40 h-9 text-right" />
-              <CurrencySelect />
-              <span className="ml-6 text-sm w-32">{L.ballastBonus}</span>
+              <Input className="w-20 h-9 text-right" />
+              <span className="ml-4 text-sm">{L.ballastBonus}</span>
               <div className="relative">
-                <Input className="w-40 h-9 pl-8 text-right" />
+                <Input className="w-32 h-9 pl-8 text-right" />
                 <button type="button" title={L.search} aria-label={L.search} className="absolute left-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
                   <Search className="h-4 w-4" />
                 </button>
               </div>
               <CurrencySelect />
               <Select defaultValue="lump">
-                <SelectTrigger className="w-32 h-9"><SelectValue /></SelectTrigger>
+                <SelectTrigger className="w-28 h-9"><SelectValue /></SelectTrigger>
                 <SelectContent><SelectItem value="lump">{L.inLumpsum}</SelectItem></SelectContent>
               </Select>
             </FieldRow>
 
             {/* C.E.V | ILOHC */}
             <FieldRow label={L.cev}>
-              <Input defaultValue="1,300.00" className="w-40 h-9 text-right" />
+              <Input defaultValue="1,300.00" className="w-28 h-9 text-right" />
               <CurrencySelect />
               <Select defaultValue="lump">
-                <SelectTrigger className="w-32 h-9"><SelectValue /></SelectTrigger>
+                <SelectTrigger className="w-28 h-9"><SelectValue /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="lump">{L.inLumpsum}</SelectItem>
                   <SelectItem value="day">{L.perDay}</SelectItem>
                   <SelectItem value="30d">{L.per30Days}</SelectItem>
                 </SelectContent>
               </Select>
-              <span className="ml-6 text-sm w-32">{L.ilohc}</span>
-              <Input defaultValue="4,500.00" className="w-40 h-9 text-right" />
+              <span className="ml-4 text-sm">{L.ilohc}</span>
+              <Input defaultValue="4,500.00" className="w-28 h-9 text-right" />
               <CurrencySelect />
             </FieldRow>
+
 
             {/* Phí môi giới */}
             <FieldRow label={L.brokerage}>
