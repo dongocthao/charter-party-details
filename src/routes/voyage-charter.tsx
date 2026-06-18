@@ -164,6 +164,7 @@ function PortTable({ rows, setRows }: { rows: PortRow[]; setRows: (r: PortRow[])
 
 function VoyageCharterPage() {
   const L = VC_LABELS;
+  const [activeTab, setActiveTab] = React.useState<"main" | "recap" | "attachment">("main");
   const [shipments, setShipments] = React.useState<ShipmentRow[]>([
     { cargo: "Coal in Bulk", quantity: "70,000.00", unit: "MT", margin: "10% MOLOO" },
     { cargo: "", quantity: "", unit: "", margin: "" },
