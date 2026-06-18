@@ -224,11 +224,11 @@ function TimeCharterPage() {
             </div>
 
             <FieldRow label={L.duration}>
-              <Select defaultValue="min"><SelectTrigger className="w-28 h-9"><SelectValue /></SelectTrigger>
+              <Select defaultValue="min"><SelectTrigger className="w-24 h-9"><SelectValue /></SelectTrigger>
                 <SelectContent><SelectItem value="min">{L.minimum}</SelectItem></SelectContent>
               </Select>
-              <Input className="w-28 h-9" />
-              <Select defaultValue="day"><SelectTrigger className="w-24 h-9"><SelectValue /></SelectTrigger>
+              <Input className="w-20 h-9" />
+              <Select defaultValue="day"><SelectTrigger className="w-20 h-9"><SelectValue /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="day">{L.day}</SelectItem>
                   <SelectItem value="month">{L.month}</SelectItem>
@@ -236,11 +236,11 @@ function TimeCharterPage() {
                 </SelectContent>
               </Select>
               <span className="text-muted-foreground">-</span>
-              <Select defaultValue="max"><SelectTrigger className="w-28 h-9"><SelectValue /></SelectTrigger>
+              <Select defaultValue="max"><SelectTrigger className="w-24 h-9"><SelectValue /></SelectTrigger>
                 <SelectContent><SelectItem value="max">{L.maximum}</SelectItem></SelectContent>
               </Select>
-              <Input className="w-28 h-9" />
-              <Select defaultValue="day"><SelectTrigger className="w-24 h-9"><SelectValue /></SelectTrigger>
+              <Input className="w-20 h-9" />
+              <Select defaultValue="day"><SelectTrigger className="w-20 h-9"><SelectValue /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="day">{L.day}</SelectItem>
                   <SelectItem value="month">{L.month}</SelectItem>
@@ -249,14 +249,15 @@ function TimeCharterPage() {
               </Select>
             </FieldRow>
 
-            <div className="grid grid-cols-[140px_1fr] gap-3 items-center py-1.5">
+            <div className="grid grid-cols-[120px_1fr] gap-2 items-center py-1.5">
               <div />
               <div className="flex items-center gap-2">
-                <Input placeholder={L.aboutMeans} className="w-28 h-9" disabled />
-                <Input className="w-28 h-9" disabled />
-                <Select disabled><SelectTrigger className="w-24 h-9"><SelectValue placeholder={L.day} /></SelectTrigger><SelectContent /></Select>
+                <Input placeholder={L.aboutMeans} className="w-24 h-9" disabled />
+                <Input className="w-20 h-9" disabled />
+                <Select disabled><SelectTrigger className="w-20 h-9"><SelectValue placeholder={L.day} /></SelectTrigger><SelectContent /></Select>
               </div>
             </div>
+
 
             <FieldRow label={L.layCan}>
               <DateInput value="2022-10-13 00:01" />
