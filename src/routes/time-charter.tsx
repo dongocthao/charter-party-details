@@ -79,9 +79,14 @@ export const Route = createFileRoute("/time-charter")({
 
 function FieldRow({ label, children }: { label: React.ReactNode; children: React.ReactNode }) {
   return (
-    <div className="grid grid-cols-[140px_1fr] gap-3 items-start py-1.5">
+    <div className="grid grid-cols-[120px_1fr] gap-2 items-start py-1.5">
       <div className="text-sm pt-2">{label}</div>
       <div className="flex flex-wrap items-center gap-2">{children}</div>
+    </div>
+  );
+}
+
+// removed extra brace
     </div>
   );
 }
