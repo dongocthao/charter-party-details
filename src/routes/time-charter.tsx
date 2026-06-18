@@ -322,7 +322,7 @@ function TimeCharterPage() {
 
             {/* C.E.V | ILOHC */}
             <FieldRow label={L.cev}>
-              <Input defaultValue="1,300.00" className="w-30 h-9 text-right" />
+              <Input defaultValue="1,300.00" className="w-28 h-9 text-right" />
               <CurrencySelect />
               <Select defaultValue="lump">
                 <SelectTrigger className="w-28 h-9"><SelectValue /></SelectTrigger>
@@ -333,7 +333,7 @@ function TimeCharterPage() {
                 </SelectContent>
               </Select>
               <span className="ml-4 text-sm">{L.ilohc}</span>
-              <Input defaultValue="4,500.00" className="w-30 h-9 text-right" />
+              <Input defaultValue="4,500.00" className="w-28 h-9 text-right" />
               <CurrencySelect />
             </FieldRow>
 
