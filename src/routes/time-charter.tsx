@@ -86,10 +86,6 @@ function FieldRow({ label, children }: { label: React.ReactNode; children: React
   );
 }
 
-// removed extra brace
-    </div>
-  );
-}
 
 function IconBtn({ title, children }: { title: string; children: React.ReactNode }) {
   return (
