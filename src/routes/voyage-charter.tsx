@@ -164,6 +164,7 @@ function PortTable({ rows, setRows }: { rows: PortRow[]; setRows: (r: PortRow[])
 
 function VoyageCharterPage() {
   const L = VC_LABELS;
+  const [activeTab, setActiveTab] = React.useState<"main" | "recap" | "attachment">("main");
   const [shipments, setShipments] = React.useState<ShipmentRow[]>([
     { cargo: "Coal in Bulk", quantity: "70,000.00", unit: "MT", margin: "10% MOLOO" },
     { cargo: "", quantity: "", unit: "", margin: "" },
@@ -217,12 +218,30 @@ function VoyageCharterPage() {
           <Link to="/time-charter" className="text-sm text-muted-foreground px-3 py-1.5 hover:text-foreground">{L.tabTime}</Link>
         </div>
 
-        <div className="mb-2 flex gap-4 border-b text-sm">
-          <span className="border-b-2 border-primary px-3 py-2 font-semibold text-primary">{L.mainTerms}</span>
-          <span className="px-3 py-2 text-muted-foreground">{L.recap}</span>
-          <span className="px-3 py-2 text-muted-foreground">{L.attachment}</span>
+        <div className="mb-2 flex gap-1 border-b">
+          {(["main","recap","attachment"] as const).map((k) => (
+            <button
+              key={k}
+              type="button"
+              onClick={() => setActiveTab(k)}
+              className={`px-4 py-2 text-sm rounded-t-md border-b-2 transition-colors ${
+                activeTab === k
+                  ? "border-primary text-primary font-semibold bg-background"
+                  : "border-transparent text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {k === "main" ? L.mainTerms : k === "recap" ? L.recap : L.attachment}
+            </button>
+          ))}
         </div>
 
+        {activeTab !== "main" && (
+          <div className="mt-6 rounded-md border bg-card p-10 text-center text-muted-foreground">
+            {activeTab === "recap" ? L.recap : L.attachment}
+          </div>
+        )}
+
+        {activeTab === "main" && (
         <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-6 mt-4">
           <CharterPartyPanel
             contractNumber="Coal202203"
@@ -346,6 +365,7 @@ function VoyageCharterPage() {
             </div>
           </div>
         </div>
+        )}
       </div>
     </div>
   );
