@@ -1,11 +1,12 @@
 import * as React from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { Calendar as CalendarIcon, Info, Plus, Minus, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { CharterPartyPanel } from "@/components/charter/CharterPartyPanel";
 import { PortCombobox } from "@/components/charter/PortCombobox";
+import { AppShell, SectionTabs } from "@/components/AppShell";
 
 // ============== Nhãn giao diện - Tab Thuê chuyến (chỉnh sửa tại đây) ==============
 export const VC_LABELS = {
@@ -211,28 +212,19 @@ function VoyageCharterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background p-6">
+    <AppShell title={L.title}>
+      <div className="p-6">
       <div className="mx-auto max-w-[1400px]">
-        <div className="mb-4 flex gap-2">
-          <Link to="/voyage-charter" className="text-sm font-semibold border-b-2 border-primary px-3 py-1.5">{L.tabVoyage}</Link>
-          <Link to="/time-charter" className="text-sm text-muted-foreground px-3 py-1.5 hover:text-foreground">{L.tabTime}</Link>
-        </div>
-
-        <div className="mb-2 flex gap-1 border-b">
-          {(["main","recap","attachment"] as const).map((k) => (
-            <button
-              key={k}
-              type="button"
-              onClick={() => setActiveTab(k)}
-              className={`px-4 py-2 text-sm rounded-t-md border-b-2 transition-colors ${
-                activeTab === k
-                  ? "border-primary text-primary font-semibold bg-background"
-                  : "border-transparent text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {k === "main" ? L.mainTerms : k === "recap" ? L.recap : L.attachment}
-            </button>
-          ))}
+        <div className="mb-4">
+          <SectionTabs
+            value={activeTab}
+            onChange={setActiveTab}
+            tabs={[
+              { key: "main", label: L.mainTerms },
+              { key: "recap", label: L.recap },
+              { key: "attachment", label: L.attachment },
+            ]}
+          />
         </div>
 
         {activeTab !== "main" && (
@@ -367,6 +359,7 @@ function VoyageCharterPage() {
         </div>
         )}
       </div>
-    </div>
+      </div>
+    </AppShell>
   );
 }
