@@ -1,10 +1,11 @@
 import * as React from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { Calendar as CalendarIcon, Info, Plus, Minus, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { CharterPartyPanel } from "@/components/charter/CharterPartyPanel";
+import { AppShell, SectionTabs } from "@/components/AppShell";
 
 // ============== Nhãn giao diện - Tab Thuê tàu định hạn (chỉnh sửa tại đây) ==============
 export const TC_LABELS = {
@@ -166,32 +167,20 @@ function TimeCharterPage() {
     setBrokerRows(brokerRows.filter((_, idx) => idx !== i));
   };
 
-  const tabBtn = (key: typeof activeTab, label: string) => (
-    <button
-      type="button"
-      onClick={() => setActiveTab(key)}
-      className={`px-4 py-2 text-sm rounded-t-md border-b-2 transition-colors ${
-        activeTab === key
-          ? "border-primary text-primary font-semibold bg-background"
-          : "border-transparent text-muted-foreground hover:text-foreground"
-      }`}
-    >
-      {label}
-    </button>
-  );
-
   return (
-    <div className="min-h-screen bg-background p-6">
+    <AppShell title={L.title}>
+      <div className="p-6">
       <div className="mx-auto max-w-[1400px]">
-        <div className="mb-4 flex gap-2">
-          <Link to="/voyage-charter" className="text-sm text-muted-foreground px-3 py-1.5 hover:text-foreground">{L.tabVoyage}</Link>
-          <Link to="/time-charter" className="text-sm font-semibold border-b-2 border-primary px-3 py-1.5">{L.tabTime}</Link>
-        </div>
-
-        <div className="mb-2 flex gap-1 border-b">
-          {tabBtn("main", L.mainTerms)}
-          {tabBtn("recap", L.recap)}
-          {tabBtn("attachment", L.attachment)}
+        <div className="mb-4">
+          <SectionTabs
+            value={activeTab}
+            onChange={setActiveTab}
+            tabs={[
+              { key: "main", label: L.mainTerms },
+              { key: "recap", label: L.recap },
+              { key: "attachment", label: L.attachment },
+            ]}
+          />
         </div>
 
         {activeTab !== "main" && (
@@ -427,6 +416,7 @@ function TimeCharterPage() {
         </div>
         )}
       </div>
-    </div>
+      </div>
+    </AppShell>
   );
 }
